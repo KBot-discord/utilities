@@ -1,6 +1,6 @@
 {
 	"name": "@kbotdev/custom-id",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Custom ID utilities for KBot",
 	"author": "@kbotdev",
 	"license": "MIT",
