@@ -6,8 +6,8 @@
       "outputs": ["dist/**"]
     },
     "test": {
-      "dependsOn": ["lint", "build"],
-      "outputs": []
+      "dependsOn": ["build"],
+      "outputs": ["coverage/**"]
     },
     "docs": {
       "dependsOn": ["build"],

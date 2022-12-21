@@ -1,5 +1,5 @@
-import { MessageActionRow, MessageEmbed } from "discord.js";
-import type { Page } from "../types";
+import { MessageActionRow, MessageEmbed } from 'discord.js';
+import type { Page } from '../types';
 
 export class PageBuilder {
 	private readonly page: Page;
@@ -29,20 +29,21 @@ export class PageBuilder {
 					embed10: MessageEmbed
 			  ) => MessageEmbed[])
 	): this {
-		this.page.embeds = typeof embeds === 'function'
-			? embeds(
-				new MessageEmbed(),
-				new MessageEmbed(),
-				new MessageEmbed(),
-				new MessageEmbed(),
-				new MessageEmbed(),
-				new MessageEmbed(),
-				new MessageEmbed(),
-				new MessageEmbed(),
-				new MessageEmbed(),
-				new MessageEmbed()
-			)
-			: embeds;
+		this.page.embeds =
+			typeof embeds === 'function'
+				? embeds(
+						new MessageEmbed(),
+						new MessageEmbed(),
+						new MessageEmbed(),
+						new MessageEmbed(),
+						new MessageEmbed(),
+						new MessageEmbed(),
+						new MessageEmbed(),
+						new MessageEmbed(),
+						new MessageEmbed(),
+						new MessageEmbed()
+				  )
+				: embeds;
 		return this;
 	}
 

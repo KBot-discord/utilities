@@ -1,8 +1,7 @@
 import { brotliDecompressSync } from 'node:zlib';
 import { deserialize } from 'binarytf';
-import type { CustomId } from '../types/CustomId';
 
-export function parseCustomId<T>(id: CustomId): { prefix: string; data: T } {
-	const { 0: prefix, 1: data } = id.split(';');
+export function parseCustomId<T>(CustomId: string): { prefix: string; data: T } {
+	const { 0: prefix, 1: data } = CustomId.split(';');
 	return { prefix, data: deserialize<T>(brotliDecompressSync(Buffer.from(data, 'binary'))) };
 }
