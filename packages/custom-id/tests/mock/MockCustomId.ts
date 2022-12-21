@@ -2,5 +2,5 @@ export interface MockCustomId {
 	data: any;
 }
 
-export const mockIdentifier = 'prefix';
+export const mockPrefix = 'prefix';
 export const mockData = { data: 'placeholder' };
