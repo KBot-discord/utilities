@@ -1,5 +1,5 @@
 import { MessageActionRow, MessageEmbed } from 'discord.js';
-import type { Page } from '../types';
+import type { Page } from '../types/Page';
 
 export class PageBuilder {
 	private readonly page: Page;

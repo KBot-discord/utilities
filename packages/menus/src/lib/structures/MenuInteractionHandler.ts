@@ -1,7 +1,6 @@
 import { InteractionHandler } from '@sapphire/framework';
 import { parseCustomId } from '@kbotdev/custom-id';
 import type { MessageComponentInteraction } from 'discord.js';
-import type { CustomId } from '../types';
 
 export abstract class MenuInteractionHandler extends InteractionHandler {
 	private readonly customIdPrefix: string;
@@ -13,7 +12,7 @@ export abstract class MenuInteractionHandler extends InteractionHandler {
 
 	public override parse(interaction: MessageComponentInteraction) {
 		if (!interaction.customId.startsWith(this.customIdPrefix)) return this.none();
-		const data = parseCustomId(interaction.customId as CustomId);
+		const data = parseCustomId(interaction.customId);
 		return this.some(data);
 	}
 }

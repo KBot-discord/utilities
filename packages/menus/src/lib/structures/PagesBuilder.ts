@@ -1,5 +1,5 @@
 import { PageBuilder } from './PageBuilder';
-import type { Page, PageResolvable } from '../types';
+import type { Page, PageResolvable } from '../types/Page';
 
 export class PagesBuilder {
 	private pages: Page[];
