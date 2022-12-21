@@ -1,0 +1,44 @@
+{
+  "name": "@kbotdev/utilities",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build --no-daemon",
+    "test": "turbo run test --no-daemon",
+    "lint": "turbo run lint --no-daemon",
+    "docs": "turbo run docs --no-daemon"
+  },
+  "devDependencies": {
+    "@microsoft/tsdoc": "^0.14.2",
+    "@sapphire/eslint-config": "^4.3.8",
+    "@sapphire/framework": "^3.1.4",
+    "@sapphire/prettier-config": "^1.4.4",
+    "@sapphire/ts-config": "^3.3.4",
+    "@types/node": "^18.11.17",
+    "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.0",
+    "discord-api-types": "^0.33.5",
+    "discord.js": "^13.12.0",
+    "eslint": "^8.30.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.1",
+    "tsup": "^6.5.0",
+    "turbo": "^1.6.3",
+    "typedoc": "^0.23.23",
+    "typescript": "^4.9.4",
+    "vitest": "^0.26.1"
+  },
+  "lint-staged": {
+    "*.{mjs,ts,js}": [
+      "eslint --fix --ext mjs,js,ts",
+      "prettier --write --loglevel=warn \"{src,tests,scripts}/**/*.{js,ts,json}\""
+    ]
+  },
+  "prettier": "@sapphire/prettier-config",
+  "packageManager": "yarn@3.3.0"
+}
