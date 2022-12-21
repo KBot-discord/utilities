@@ -6,18 +6,13 @@
       "outputs": ["dist/**"]
     },
     "test": {
-      "dependsOn": ["^build"],
-      "outputs": []
-    },
-    "lint": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["lint", "build"],
       "outputs": []
     },
     "docs": {
-      "dependsOn": [
-		"@kbotdev/menus#build"
-	],
+      "dependsOn": ["build"],
       "outputs": ["docs/**"]
-    }
+    },
+	"lint": {}
   }
 }

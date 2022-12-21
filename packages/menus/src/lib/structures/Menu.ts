@@ -1,35 +1,47 @@
 import { NonModalInteraction, PaginatedMessage, PaginatedMessageOptions } from '@sapphire/discord.js-utilities';
-import { Message, MessageEmbed, User } from 'discord.js';
-import { buildKey } from '../util/CustomIds';
+import { isFunction } from '../util/isFunction';
+import { PageBuilder } from './PageBuilder';
+import { PagesBuilder } from './PagesBuilder';
+import type { Message, User } from 'discord.js';
 
 export class Menu {
-	private readonly paginatedMessage;
+	public readonly paginatedMessage;
 
-	protected constructor(options: MenuOptions) {
+	public constructor(options?: MenuOptions) {
 		this.paginatedMessage = new PaginatedMessage(options);
 	}
 
-	public setHomePage(embed: MessageEmbed | ((embed: MessageEmbed) => MessageEmbed)) {
+	public setHomePage(page: PageBuilder | ((page: PageBuilder) => PageBuilder)) {
 		const { pages } = this.paginatedMessage;
-		const page = { embeds: typeof embed === 'function' ? [embed(new MessageEmbed())] : [embed] };
+		const resolvedPage = this.resolvePage(page).build();
 		pages.length === 0 //
-			? pages.push(page)
-			: pages.unshift(page);
+			? pages.push(resolvedPage)
+			: pages.unshift(resolvedPage);
 		return this;
 	}
 
-	public createCustomId<T>(prefix: string, params: T | never) {
-		return buildKey<T>(prefix, params);
+	public addPage(page: PageBuilder | ((page: PageBuilder) => PageBuilder)): this {
+		const resolvedPage = this.resolvePage(page).build();
+		this.paginatedMessage.addPage(resolvedPage);
+		return this;
 	}
 
-	public run(messageOrInteraction: Message | NonModalInteraction, target?: User) {
+	public setPages(pages: PageBuilder[] | PagesBuilder): this {
+		const resolvedPages = pages instanceof PagesBuilder ? pages.build() : pages.map((page) => page.build());
+		this.paginatedMessage.setPages(resolvedPages);
+		return this;
+	}
+
+	public run(messageOrInteraction: Message | NonModalInteraction, target?: User): Promise<PaginatedMessage> {
 		return this.paginatedMessage.run(messageOrInteraction, target);
 	}
+
+	private resolvePage(input: any): PageBuilder {
+		return isFunction(input) ? input(new PageBuilder()) : input;
+	}
 }
 
-export interface Menus {
-	Test: { test: string };
-}
+export interface Menus {}
 
 export interface MenuOptions extends PaginatedMessageOptions {}
 

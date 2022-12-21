@@ -8,18 +8,18 @@ export class PagesBuilder {
 		this.pages = pages ? pages.map((page) => this.resolvePage(page)) : [];
 	}
 
-	public addPage(page: PageResolvable) {
+	public addPage(page: PageResolvable): this {
 		const resolvedPage = this.resolvePage(page);
 		this.pages.push(resolvedPage);
 		return this;
 	}
 
-	public setPages(pages: PageResolvable[]) {
+	public setPages(pages: PageResolvable[]): this {
 		this.pages = pages.map((page) => this.resolvePage(page));
 		return this;
 	}
 
-	public build() {
+	public build(): Page[] {
 		return this.pages;
 	}
 
