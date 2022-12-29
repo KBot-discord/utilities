@@ -1,10 +1,10 @@
 import { describe, test, expect } from 'vitest';
-import { PageBuilder, PagesBuilder } from '../../../src';
+import { MenuPageBuilder, MenuPagesBuilder } from '../../../src';
 
 describe('PagesBuilder', () => {
 	describe('Constructor', () => {
 		test('GIVEN default page builder -> RETURN empty page', () => {
-			const pageBuilder = new PagesBuilder();
+			const pageBuilder = new MenuPagesBuilder();
 
 			expect(pageBuilder.build()).toStrictEqual([]);
 		});
@@ -12,8 +12,8 @@ describe('PagesBuilder', () => {
 
 	describe('Builder methods', () => {
 		test('GIVEN pages builder with page -> RETURN pages', () => {
-			const pages = new PagesBuilder();
-			const page = new PageBuilder();
+			const pages = new MenuPagesBuilder();
+			const page = new MenuPageBuilder();
 
 			pages.addPage(page);
 			const builtPages = pages.build();
@@ -23,8 +23,8 @@ describe('PagesBuilder', () => {
 		});
 
 		test('GIVEN pages builder with pages -> RETURN pages', () => {
-			const pages = new PagesBuilder();
-			const page = new PageBuilder();
+			const pages = new MenuPagesBuilder();
+			const page = new MenuPageBuilder();
 
 			pages.setPages([page, page]);
 			const builtPages = pages.build();

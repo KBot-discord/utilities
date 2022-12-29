@@ -1,47 +1,47 @@
 import { describe, test, expect } from 'vitest';
 import { MessageButton } from 'discord.js';
-import { PageBuilder } from '../../../src';
+import { MenuPageBuilder } from '../../../src';
 import { mockEmptyData, mockEmbedData, mockEmbedsData, mockRowData, mockRowsData, mockData } from '../../mock/MockPageData';
 
 describe('PageBuilder', () => {
 	describe('Constructor', () => {
 		test('GIVEN default page builder -> RETURN empty page', () => {
-			const page = new PageBuilder();
+			const page = new MenuPageBuilder();
 
-			expect(page).toBeInstanceOf(PageBuilder);
+			expect(page).toBeInstanceOf(MenuPageBuilder);
 			expect(page.build()).toStrictEqual(mockEmptyData);
 		});
 	});
 
 	describe('Builder methods', () => {
 		test('GIVEN page builder with embed -> RETURN page with embed', () => {
-			const page = new PageBuilder() //
+			const page = new MenuPageBuilder() //
 				.addEmbed((embed) => embed.setAuthor({ name: 'test' }));
 
-			expect(page).toBeInstanceOf(PageBuilder);
+			expect(page).toBeInstanceOf(MenuPageBuilder);
 			expect(page.build()).toStrictEqual(mockEmbedData);
 		});
 
 		test('GIVEN page builder with embeds -> RETURN page with embeds', () => {
-			const page = new PageBuilder() //
+			const page = new MenuPageBuilder() //
 				.setEmbeds((embed1, embed2, embed3) => {
 					return [embed1.setAuthor({ name: 'test' }), embed2.setAuthor({ name: 'test' }), embed3.setAuthor({ name: 'test' })];
 				});
 
-			expect(page).toBeInstanceOf(PageBuilder);
+			expect(page).toBeInstanceOf(MenuPageBuilder);
 			expect(page.build()).toStrictEqual(mockEmbedsData);
 		});
 
 		test('GIVEN page builder with row -> RETURN page with row', () => {
-			const page = new PageBuilder() //
+			const page = new MenuPageBuilder() //
 				.addComponentRow((row) => row.addComponents(new MessageButton()));
 
-			expect(page).toBeInstanceOf(PageBuilder);
+			expect(page).toBeInstanceOf(MenuPageBuilder);
 			expect(page.build()).toStrictEqual(mockRowData);
 		});
 
 		test('GIVEN page builder with rows -> RETURN page with rows', () => {
-			const page = new PageBuilder() //
+			const page = new MenuPageBuilder() //
 				.setComponentRows((row1, row2, row3) => {
 					return [
 						row1.addComponents(new MessageButton()),
@@ -50,37 +50,37 @@ describe('PageBuilder', () => {
 					];
 				});
 
-			expect(page).toBeInstanceOf(PageBuilder);
+			expect(page).toBeInstanceOf(MenuPageBuilder);
 			expect(page.build()).toStrictEqual(mockRowsData);
 		});
 	});
 
 	describe('Constructor with data', () => {
 		test('GIVEN builder with existing empty page -> RETURN page with empty page', () => {
-			const page = new PageBuilder(mockEmptyData);
+			const page = new MenuPageBuilder(mockEmptyData);
 
-			expect(page).toBeInstanceOf(PageBuilder);
+			expect(page).toBeInstanceOf(MenuPageBuilder);
 			expect(page.build()).toStrictEqual(mockEmptyData);
 		});
 
 		test('GIVEN builder with existing page with embeds -> RETURN page with embeds', () => {
-			const page = new PageBuilder(mockEmbedData);
+			const page = new MenuPageBuilder(mockEmbedData);
 
-			expect(page).toBeInstanceOf(PageBuilder);
+			expect(page).toBeInstanceOf(MenuPageBuilder);
 			expect(page.build()).toStrictEqual(mockEmbedData);
 		});
 
 		test('GIVEN builder with existing page with rows -> RETURN page with rows', () => {
-			const page = new PageBuilder(mockRowData);
+			const page = new MenuPageBuilder(mockRowData);
 
-			expect(page).toBeInstanceOf(PageBuilder);
+			expect(page).toBeInstanceOf(MenuPageBuilder);
 			expect(page.build()).toStrictEqual(mockRowData);
 		});
 
 		test('GIVEN builder with existing page with embeds and rows -> RETURN page with embeds and rows', () => {
-			const page = new PageBuilder(mockData);
+			const page = new MenuPageBuilder(mockData);
 
-			expect(page).toBeInstanceOf(PageBuilder);
+			expect(page).toBeInstanceOf(MenuPageBuilder);
 			expect(page.build()).toStrictEqual(mockData);
 		});
 	});

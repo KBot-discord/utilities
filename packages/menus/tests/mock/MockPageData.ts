@@ -1,32 +1,32 @@
 import { MessageEmbed, MessageActionRow, MessageButton } from 'discord.js';
-import type { Page } from '../../src';
+import type { MenuPage } from '../../src';
 
-export const mockEmptyData: Page = { embeds: [], rows: [] };
+export const mockEmptyData: MenuPage = { embeds: [], components: [] };
 
 export const mockEmbed = new MessageEmbed().setAuthor({ name: 'test' });
 export const mockRow = new MessageActionRow().addComponents(new MessageButton());
 
-export const mockEmbedData: Page = {
+export const mockEmbedData: MenuPage = {
 	embeds: [mockEmbed],
-	rows: []
+	components: []
 };
 
-export const mockEmbedsData: Page = {
+export const mockEmbedsData: MenuPage = {
 	embeds: [mockEmbed, mockEmbed, mockEmbed],
-	rows: []
+	components: []
 };
 
-export const mockRowData: Page = {
+export const mockRowData: MenuPage = {
 	embeds: [],
-	rows: [mockRow]
+	components: [mockRow]
 };
 
-export const mockRowsData: Page = {
+export const mockRowsData: MenuPage = {
 	embeds: [],
-	rows: [mockRow, mockRow, mockRow]
+	components: [mockRow, mockRow, mockRow]
 };
 
-export const mockData: Page = {
+export const mockData: MenuPage = {
 	embeds: mockEmbedData.embeds,
-	rows: mockRowData.rows
+	components: mockRowData.components
 };
