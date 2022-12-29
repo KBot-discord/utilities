@@ -1,14 +1,15 @@
 import { MessageActionRow, MessageEmbed } from 'discord.js';
-import type { Page } from '../types/Page';
+import type { MenuPage } from '../types/MenuPage';
 
-export class PageBuilder {
-	private readonly page: Page;
+export class MenuPageBuilder {
+	private readonly page: MenuPage;
 
-	public constructor(page?: Page) {
-		this.page = page ?? { embeds: [], rows: [] };
+	public constructor(page?: MenuPage) {
+		this.page = page ?? { embeds: [], components: [] };
 	}
 
 	public addEmbed(embed: MessageEmbed | ((embed: MessageEmbed) => MessageEmbed)): this {
+		if (!this.page.embeds) this.page.embeds = [];
 		this.page.embeds.push(typeof embed === 'function' ? embed(new MessageEmbed()) : embed);
 		return this;
 	}
@@ -48,18 +49,19 @@ export class PageBuilder {
 	}
 
 	public addComponentRow(row: MessageActionRow | ((row: MessageActionRow) => MessageActionRow)): this {
-		this.page.rows.push(typeof row === 'function' ? row(new MessageActionRow()) : row);
+		if (!this.page.components) this.page.components = [];
+		this.page.components.push(typeof row === 'function' ? row(new MessageActionRow()) : row);
 		return this;
 	}
 
 	public setComponentRows(
 		rows: MessageActionRow[] | ((row1: MessageActionRow, row2: MessageActionRow, row3: MessageActionRow) => MessageActionRow[])
 	): this {
-		this.page.rows = typeof rows === 'function' ? rows(new MessageActionRow(), new MessageActionRow(), new MessageActionRow()) : rows;
+		this.page.components = typeof rows === 'function' ? rows(new MessageActionRow(), new MessageActionRow(), new MessageActionRow()) : rows;
 		return this;
 	}
 
-	public build(): Page {
+	public build(): MenuPage {
 		return this.page;
 	}
 }
