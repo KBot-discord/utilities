@@ -2,17 +2,17 @@
 	"name": "@kbotdev/menus",
 	"version": "0.1.5",
 	"description": "Menu utilities for KBot",
-	"author": "kbotdev",
+	"author": "@kbotdev",
 	"license": "MIT",
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
 	"types": "dist/index.d.ts",
 	"repository": {
 		"type": "git",
-		"url": "https://gitlab.com/kbotdev/utilities.git",
+		"url": "https://github.com/KBot-discord/utilities.git",
 		"directory": "packages/menus"
 	},
-	"homepage": "https://gitlab.com/kbotdev/utilities/-/tree/main/packages/menus",
+	"homepage": "https://github.com/KBot-discord/utilities/tree/main/packages/menus",
 	"dependencies": {
 		"@sapphire/discord.js-utilities": "^5.1.2",
 		"discord.js": "^13.12.0",
