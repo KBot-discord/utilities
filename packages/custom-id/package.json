@@ -9,10 +9,10 @@
 	"types": "dist/index.d.ts",
 	"repository": {
 		"type": "git",
-		"url": "https://gitlab.com/kbotdev/utilities.git",
-		"directory": "packages/menus"
+		"url": "https://github.com/KBot-discord/utilities.git",
+		"directory": "packages/custom-id"
 	},
-	"homepage": "https://gitlab.com/kbotdev/utilities/-/tree/main/packages/custom-id",
+	"homepage": "https://github.com/KBot-discord/utilities/tree/main/packages/custom-id",
 	"dependencies": {
 		"binarytf": "^2.1.2"
 	},
