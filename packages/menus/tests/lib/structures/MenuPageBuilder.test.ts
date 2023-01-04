@@ -1,7 +1,6 @@
 import { describe, test, expect } from 'vitest';
-import { MessageButton } from 'discord.js';
 import { MenuPageBuilder } from '../../../src';
-import { mockEmptyData, mockEmbedData, mockEmbedsData, mockRowData, mockRowsData, mockData } from '../../mock/MockPageData';
+import { mockEmptyData, mockEmbedData, mockEmbedsData, mockRowData, mockRowsData, mockData, mockRow } from '../../mock/MockPageData';
 
 describe('PageBuilder', () => {
 	describe('Constructor', () => {
@@ -32,9 +31,9 @@ describe('PageBuilder', () => {
 			expect(page.build()).toStrictEqual(mockEmbedsData);
 		});
 
-		test('GIVEN page builder with row -> RETURN page with row', () => {
+		test('GIVEN page builder with rows -> RETURN page with rows', () => {
 			const page = new MenuPageBuilder() //
-				.addComponentRow((row) => row.addComponents(new MessageButton()));
+				.addComponentRow(mockRow);
 
 			expect(page).toBeInstanceOf(MenuPageBuilder);
 			expect(page.build()).toStrictEqual(mockRowData);
@@ -42,13 +41,7 @@ describe('PageBuilder', () => {
 
 		test('GIVEN page builder with rows -> RETURN page with rows', () => {
 			const page = new MenuPageBuilder() //
-				.setComponentRows((row1, row2, row3) => {
-					return [
-						row1.addComponents(new MessageButton()),
-						row2.addComponents(new MessageButton()),
-						row3.addComponents(new MessageButton())
-					];
-				});
+				.setComponentRows([mockRow, mockRow, mockRow]);
 
 			expect(page).toBeInstanceOf(MenuPageBuilder);
 			expect(page.build()).toStrictEqual(mockRowsData);

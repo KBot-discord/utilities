@@ -15,7 +15,7 @@ describe('Menu', () => {
 			const page = new MenuPageBuilder();
 			const menu = new Menu();
 
-			menu.setHomeMenuPage(page);
+			menu.setHomePage(page);
 
 			expect(menu.pages.length).toBe(1);
 		});
@@ -24,7 +24,7 @@ describe('Menu', () => {
 			const page = new MenuPageBuilder();
 			const menu = new Menu();
 
-			menu.setMenuPages([page, page]);
+			menu.setPages([page, page]);
 
 			expect(menu.pages.length).toBe(2);
 		});
@@ -34,7 +34,7 @@ describe('Menu', () => {
 			const pages = new MenuPagesBuilder().setPages([page, page]);
 			const menu = new Menu();
 
-			menu.setMenuPages(pages);
+			menu.setPages(pages);
 
 			expect(menu.pages.length).toBe(2);
 		});
@@ -43,8 +43,8 @@ describe('Menu', () => {
 			const pages = new MenuPagesBuilder();
 			const menu = new Menu();
 
-			menu.setMenuPages(pages);
-			menu.setMenuPages([]);
+			menu.setPages(pages);
+			menu.setPages([]);
 
 			expect(menu.pages.length).toBe(0);
 		});

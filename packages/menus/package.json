@@ -1,54 +1,52 @@
 {
-  "name": "@kbotdev/menus",
-  "version": "0.0.6",
-  "description": "Menu utilities for KBot",
-  "author": "@kbotdev",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "https://gitlab.com/kbotdev/utilities.git",
-    "directory": "packages/menus"
-  },
-  "homepage": "https://gitlab.com/kbotdev/utilities/-/tree/main/packages/menus",
-  "dependencies": {
-    "@kbotdev/custom-id": "workspace:^",
-    "@sapphire/discord.js-utilities": "^5.1.2",
-    "@sapphire/framework": "^3.1.4",
-    "discord.js": "^13.12.0",
-    "tslib": "^2.4.1"
-  },
-  "devDependencies": {
-    "@microsoft/tsdoc": "^0.14.2",
-    "tsup": "^6.5.0",
-    "typedoc": "^0.23.23",
-    "typescript": "^4.9.4",
-    "vitest": "^0.26.2"
-  },
-  "engines": {
-    "node": ">=14.x"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "files": [
-    "dist/**/*.js*",
-    "dist/**/*.mjs*",
-    "dist/**/*.d*"
-  ],
-  "scripts": {
-    "lint": "eslint --fix --ext .ts src",
-    "format": "prettier --write --loglevel=warn \"src/**/*.{js,ts,json}\"",
-    "build": "tsup",
-	"test": "vitest run",
-	"test:unit": "vitest",
-	"docs": "typedoc ."
-  },
-  "packageManager": "yarn@3.2.4"
+	"name": "@kbotdev/menus",
+	"version": "0.0.1",
+	"description": "Menu utilities for KBot",
+	"author": "kbotdev",
+	"license": "MIT",
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "https://gitlab.com/kbotdev/utilities.git",
+		"directory": "packages/menus"
+	},
+	"homepage": "https://gitlab.com/kbotdev/utilities/-/tree/main/packages/menus",
+	"dependencies": {
+		"@sapphire/discord.js-utilities": "^5.1.2",
+		"discord.js": "^13.12.0",
+		"tslib": "^2.4.1"
+	},
+	"devDependencies": {
+		"@microsoft/tsdoc": "^0.14.2",
+		"tsup": "^6.5.0",
+		"typedoc": "^0.23.23",
+		"typescript": "^4.9.4",
+		"vitest": "^0.26.2"
+	},
+	"engines": {
+		"node": ">=14.x"
+	},
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"files": [
+		"dist/**/*.js*",
+		"dist/**/*.mjs*",
+		"dist/**/*.d*"
+	],
+	"scripts": {
+		"lint": "eslint --fix --ext .ts src",
+		"format": "prettier --write --loglevel=warn \"src/**/*.{js,ts,json}\"",
+		"build": "tsup",
+		"test": "vitest run",
+		"test:unit": "vitest",
+		"docs": "typedoc ."
+	},
+	"packageManager": "yarn@3.3.1"
 }

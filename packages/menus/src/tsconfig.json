@@ -1,11 +1,11 @@
 {
 	"extends": "../../../tsconfig.base.json",
 	"compilerOptions": {
-		"rootDir": ".",
+		"rootDir": "./",
 		"outDir": "../dist",
-		"incremental": false
+		"composite": false,
+		"preserveConstEnums": true,
+		"tsBuildInfoFile": "../dist/.tsbuildinfo"
 	},
-	"include": [
-		"."
-	]
+	"include": ["."]
 }

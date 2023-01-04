@@ -1,5 +1,5 @@
 import { MenuPageBuilder } from './MenuPageBuilder';
-import type { MenuPage, MenuPageResolvable } from '../types/MenuPage';
+import type { MenuPage, MenuPageResolvable } from '../types/MenuPageTypes';
 
 export class MenuPagesBuilder {
 	private pages: MenuPage[];
@@ -15,7 +15,8 @@ export class MenuPagesBuilder {
 	}
 
 	public setPages(pages: MenuPageResolvable[]): this {
-		this.pages = pages.map((page) => this.resolvePage(page));
+		this.pages = [];
+		for (const page of pages) this.addPage(page);
 		return this;
 	}
 
