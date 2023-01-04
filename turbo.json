@@ -13,6 +13,7 @@
       "dependsOn": ["build"],
       "outputs": ["docs/**"]
     },
-	"lint": {}
+	"lint": {},
+	"format": {}
   }
 }
