@@ -37,7 +37,7 @@
   "lint-staged": {
     "*.{mjs,ts,js}": [
       "eslint --fix --ext mjs,js,ts",
-      "prettier --write --loglevel=warn \"{src,tests,scripts}/**/*.{js,ts,json}\""
+      "prettier --write --loglevel=warn \"{src,tests}/**/*.{js,ts,json}\""
     ]
   },
   "prettier": "@sapphire/prettier-config",
