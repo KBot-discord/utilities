@@ -55,7 +55,7 @@ jobs:
         run: yarn build
 
   docs:
-    name: Generate documentation
+    name: Documentation
     runs-on: ubuntu-latest
 
     steps:
