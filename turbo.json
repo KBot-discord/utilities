@@ -15,6 +15,10 @@
     },
 	"lint": {},
 	"format": {},
-    "ci:lint": {}
+    "ci:lint": {},
+    "ci:test": {
+      "dependsOn": ["build"],
+      "outputs": ["coverage/**"]
+    }
   }
 }
