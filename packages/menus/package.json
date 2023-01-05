@@ -46,7 +46,8 @@
 		"build": "tsup",
 		"test": "vitest run",
 		"test:unit": "vitest",
-		"docs": "typedoc ."
+		"docs": "typedoc .",
+		"ci:lint": "eslint --fix=false --ext .ts src"
 	},
 	"packageManager": "yarn@3.3.1"
 }

@@ -7,7 +7,7 @@
   "scripts": {
     "build": "turbo run build --no-daemon",
     "test": "turbo run test --no-daemon",
-    "lint": "turbo run lint --no-daemon",
+    "lint": "turbo run ci:lint --no-daemon",
     "format": "turbo run format --no-daemon",
     "docs": "turbo run docs --no-daemon"
   },

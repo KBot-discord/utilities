@@ -39,6 +39,15 @@ jobs:
 
     if: github.repository_owner == 'kbot-discord'
 
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - package: '@kbotdev/custom-id'
+            folder: 'custom-id'
+          - package: '@kbotdev/menus'
+            folder: 'menus'
+
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
