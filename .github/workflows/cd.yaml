@@ -1,18 +1,16 @@
-name: Release
+name: CD
 
 on:
   push:
-    branches:
-      - main
     tags:
       - '@kbotdev/*@*.*.*'
 
 jobs:
   release:
-    name:
+    name: Release
     runs-on: ubuntu-latest
 
-    if: github.repository_owner == 'kbot-discord'
+    if: ${{ github.repository_owner == 'kbot-discord' && github.ref == 'refs/heads/main' }}
 
     permissions:
       contents: write
@@ -34,10 +32,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
   publish:
-    name:
+    name: Publish
     runs-on: ubuntu-latest
 
-    if: github.repository_owner == 'kbot-discord'
+    if: ${{ github.repository_owner == 'kbot-discord' && github.ref == 'refs/heads/main' }}
 
     strategy:
       fail-fast: false
