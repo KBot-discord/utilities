@@ -14,6 +14,11 @@
       "outputs": ["docs/**"]
     },
 	"lint": {},
-	"format": {}
+	"format": {},
+    "ci:lint": {},
+    "ci:test": {
+      "dependsOn": ["build"],
+      "outputs": ["coverage/**"]
+    }
   }
 }
