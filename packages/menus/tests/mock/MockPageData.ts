@@ -1,14 +1,14 @@
-import { MessageEmbed, MessageActionRow, MessageButton } from "discord.js";
-import type { MenuPage } from '../../src';
+import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
+import type { MenuPage, MenuPageRowUnion } from '../../src';
 
 export const mockEmptyData: MenuPage = { embeds: [], components: [] };
 
-export const mockEmbed: MessageEmbed = new MessageEmbed().setAuthor({ name: 'test' });
-export const mockRow: MessageActionRow = new MessageActionRow().setComponents([
-	new MessageButton({ customId: '1', style: 'PRIMARY'}),
-	new MessageButton({ customId: '2', style: 'PRIMARY'}),
-	new MessageButton({ customId: '3', style: 'PRIMARY'})
-])
+export const mockEmbed: EmbedBuilder = new EmbedBuilder().setAuthor({ name: 'test' });
+export const mockRow: ActionRowBuilder<MenuPageRowUnion> = new ActionRowBuilder<MenuPageRowUnion>().setComponents([
+	new ButtonBuilder({ customId: '1', style: ButtonStyle.Primary }),
+	new ButtonBuilder({ customId: '2', style: ButtonStyle.Primary }),
+	new ButtonBuilder({ customId: '3', style: ButtonStyle.Primary })
+]);
 
 export const mockEmbedData: MenuPage = {
 	embeds: [mockEmbed],
