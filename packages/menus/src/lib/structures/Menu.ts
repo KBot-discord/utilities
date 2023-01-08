@@ -1,81 +1,87 @@
 import {
-	type NonModalInteraction,
+	type AnyInteractableInteraction,
 	isAnyInteraction,
-	safelyReplyToInteraction,
 	isMessageInstance,
-	isGuildBasedChannel
+	isGuildBasedChannel,
+	safelyReplyToInteraction
 } from '@sapphire/discord.js-utilities';
-import type { APIMessage } from 'discord-api-types/v10';
 import {
+	type SelectMenuComponentOptionData,
+	ActionRowBuilder,
+	ButtonBuilder,
+	StringSelectMenuBuilder,
+	ButtonStyle,
+	ComponentType,
+	type User,
+	userMention,
+	type APIMessage,
 	type Message,
 	InteractionCollector,
-	type MessageComponentInteraction,
-	type User,
-	type WebhookEditMessageOptions,
-	type MessageOptions,
-	type TextBasedChannel,
-	Constants,
 	type ButtonInteraction,
-	type SelectMenuInteraction,
+	type StringSelectMenuInteraction,
+	type WebhookEditMessageOptions,
+	type InteractionReplyOptions,
+	type BaseMessageOptions,
+	type TextBasedChannel,
+	InteractionType,
 	type Collection,
-	type Snowflake,
-	Formatters,
-	MessageSelectMenu,
-	MessageActionRow,
-	MessageButton,
-	MessageSelectOptionData
+	type Snowflake
 } from 'discord.js';
 import type {
+	MenuPageRowUnion,
+	MenuArrowFunction,
 	MenuSelectMenuOptionsFunction,
-	MenuStopReasons,
 	MenuWrongUserInteractionReplyFunction,
 	MenuPage,
 	MenuOptions,
-	MenuArrowFunction
+	MenuStopReasons
 } from '../types/MenuPageTypes';
 import { isFunction, isNullOrUndefined, isObject } from '../util';
 import { MenuPageBuilder } from './MenuPageBuilder';
 import { MenuPagesBuilder } from './MenuPagesBuilder';
 
 export class Menu {
-	public static defaultRows(options: MessageSelectOptionData[], placeholder?: string): MessageActionRow[] {
+	public static defaultRows(
+		options: SelectMenuComponentOptionData[],
+		placeholder?: string
+	): ActionRowBuilder<ButtonBuilder | StringSelectMenuBuilder>[] {
 		return [
-			new MessageActionRow().setComponents([
-				new MessageButton({
+			new ActionRowBuilder<MenuPageRowUnion>().setComponents([
+				new ButtonBuilder({
 					customId: '@kbotdev/menus.firstPage',
-					style: 'PRIMARY',
+					style: ButtonStyle.Primary,
 					emoji: '⏪',
-					type: Constants.MessageComponentTypes.BUTTON
+					type: ComponentType.Button
 				}),
-				new MessageButton({
+				new ButtonBuilder({
 					customId: '@kbotdev/menus.previousPage',
-					style: 'PRIMARY',
+					style: ButtonStyle.Primary,
 					emoji: '◀️',
-					type: Constants.MessageComponentTypes.BUTTON
+					type: ComponentType.Button
 				}),
-				new MessageButton({
+				new ButtonBuilder({
 					customId: '@kbotdev/menus.nextPage',
-					style: 'PRIMARY',
+					style: ButtonStyle.Primary,
 					emoji: '▶️',
-					type: Constants.MessageComponentTypes.BUTTON
+					type: ComponentType.Button
 				}),
-				new MessageButton({
+				new ButtonBuilder({
 					customId: '@kbotdev/menus.goToLastPage',
-					style: 'PRIMARY',
+					style: ButtonStyle.Primary,
 					emoji: '⏩',
-					type: Constants.MessageComponentTypes.BUTTON
+					type: ComponentType.Button
 				}),
-				new MessageButton({
+				new ButtonBuilder({
 					customId: '@kbotdev/menus.stop',
-					style: 'DANGER',
+					style: ButtonStyle.Danger,
 					emoji: '⏹️',
-					type: Constants.MessageComponentTypes.BUTTON
+					type: ComponentType.Button
 				})
 			]),
-			new MessageActionRow().setComponents([
-				new MessageSelectMenu({
+			new ActionRowBuilder<MenuPageRowUnion>().setComponents([
+				new StringSelectMenuBuilder({
 					customId: '@kbotdev/menus.goToPage',
-					type: Constants.MessageComponentTypes.SELECT_MENU,
+					type: ComponentType.StringSelect,
 					options,
 					placeholder
 				})
@@ -119,18 +125,18 @@ export class Menu {
 	public static selectMenuOptions: MenuSelectMenuOptionsFunction = (pageIndex) => ({ label: `Page ${pageIndex}` });
 
 	public static wrongUserInteractionReply: MenuWrongUserInteractionReplyFunction = (targetUser: User) => ({
-		content: `This menu is only for ${Formatters.userMention(targetUser.id)}.`,
+		content: `This menu is only for ${userMention(targetUser.id)}.`,
 		ephemeral: true,
 		allowedMentions: { users: [], roles: [] }
 	});
 
 	public pages: MenuPage[] = [];
 
-	public rows: MessageActionRow[] = [];
+	public rows: ActionRowBuilder<MenuPageRowUnion>[] = [];
 
-	public response: APIMessage | Message | NonModalInteraction | null = null;
+	public response: APIMessage | Message | AnyInteractableInteraction | null = null;
 
-	public collector: InteractionCollector<MessageComponentInteraction> | null = null;
+	public collector: InteractionCollector<ButtonInteraction | StringSelectMenuInteraction> | null = null;
 
 	public index = 0;
 
@@ -157,17 +163,17 @@ export class Menu {
 		return this;
 	}
 
-	public setSharedRows(rows: MessageActionRow[]): this {
+	public setSharedRows(rows: ActionRowBuilder<MenuPageRowUnion>[]): this {
 		this.rows = [];
 		return this.addSharedRows([...rows]);
 	}
 
-	public addSharedRows(rows: MessageActionRow[]): this {
+	public addSharedRows(rows: ActionRowBuilder<MenuPageRowUnion>[]): this {
 		for (const row of rows) this.addSharedRow(row);
 		return this;
 	}
 
-	public addSharedRow(row: MessageActionRow): this {
+	public addSharedRow(row: ActionRowBuilder<MenuPageRowUnion>): this {
 		this.rows.push(row);
 		return this;
 	}
@@ -211,7 +217,7 @@ export class Menu {
 
 		this.pages[currentIndex] = builtPage;
 
-		const response = this.response as NonModalInteraction;
+		const response = this.response as AnyInteractableInteraction;
 		return response.editReply(builtPage);
 	}
 
@@ -219,7 +225,7 @@ export class Menu {
 		return isFunction(builder) ? builder(new MenuPageBuilder()) : builder;
 	}
 
-	public async run(messageOrInteraction: Message | NonModalInteraction, target?: User): Promise<this> {
+	public async run(messageOrInteraction: Message | AnyInteractableInteraction, target?: User): Promise<this> {
 		target ??= isAnyInteraction(messageOrInteraction) ? messageOrInteraction.user : messageOrInteraction.author;
 
 		const menu = Menu.handlers.get(target.id);
@@ -251,7 +257,7 @@ export class Menu {
 		return this;
 	}
 
-	protected async setUpMessage(messageOrInteraction: Message | NonModalInteraction): Promise<void> {
+	protected async setUpMessage(messageOrInteraction: Message | AnyInteractableInteraction): Promise<void> {
 		if (this.pages.length > 1) {
 			const selectMenuOptions = await Promise.all(
 				this.pages.map(async (_, index) => {
@@ -278,7 +284,7 @@ export class Menu {
 				if (this.response.replied || this.response.deferred) {
 					await this.response.editReply(homePage as WebhookEditMessageOptions);
 				} else {
-					await this.response.reply(homePage as WebhookEditMessageOptions);
+					await this.response.reply(homePage as InteractionReplyOptions);
 				}
 			} else if (isMessageInstance(this.response)) {
 				await this.response.edit(homePage as WebhookEditMessageOptions);
@@ -291,12 +297,12 @@ export class Menu {
 				this.response = await messageOrInteraction.reply({ ...homePage, fetchReply: true, ephemeral: false });
 			}
 		} else {
-			this.response = await messageOrInteraction.channel.send(homePage as MessageOptions);
+			this.response = await messageOrInteraction.channel.send(homePage as BaseMessageOptions);
 		}
 	}
 
 	protected setUpCollector(channel: TextBasedChannel, targetUser: User): void {
-		this.collector = new InteractionCollector<MessageComponentInteraction>(targetUser.client, {
+		this.collector = new InteractionCollector<ButtonInteraction | StringSelectMenuInteraction>(targetUser.client, {
 			filter: (interaction) =>
 				!isNullOrUndefined(this.response) && //
 				interaction.isMessageComponent() &&
@@ -308,7 +314,7 @@ export class Menu {
 
 			channel,
 
-			interactionType: Constants.InteractionTypes.MESSAGE_COMPONENT,
+			interactionType: InteractionType.MessageComponent,
 
 			...(this.response && !isAnyInteraction(this.response)
 				? {
@@ -325,7 +331,7 @@ export class Menu {
 		return this.applyFooter(pageWithComponents, index);
 	}
 
-	protected async handleCollect(targetUser: User, interaction: ButtonInteraction | SelectMenuInteraction): Promise<void> {
+	protected async handleCollect(targetUser: User, interaction: ButtonInteraction | StringSelectMenuInteraction): Promise<void> {
 		if (interaction.user.id === targetUser.id) {
 			this.response = interaction;
 
@@ -361,7 +367,7 @@ export class Menu {
 		}
 	}
 
-	protected async handleEnd(_: Collection<Snowflake, ButtonInteraction | SelectMenuInteraction>, reason: MenuStopReasons): Promise<void> {
+	protected async handleEnd(_: Collection<Snowflake, ButtonInteraction | StringSelectMenuInteraction>, reason: MenuStopReasons): Promise<void> {
 		if (
 			(reason === 'time' || reason === 'idle') &&
 			this.response !== null &&
@@ -397,8 +403,8 @@ export class Menu {
 		const idx = page.embeds.length - 1;
 		const lastEmbed = page.embeds[idx];
 		if (lastEmbed) {
-			lastEmbed.footer ??= { text: '' };
-			lastEmbed.footer.text = `${index + 1} / ${this.pages.length}`;
+			lastEmbed.data.footer ??= { text: '' };
+			lastEmbed.data.footer.text = `${index + 1} / ${this.pages.length}`;
 		}
 
 		return { ...page, embeds: page.embeds };

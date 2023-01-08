@@ -1,30 +1,34 @@
 import type { AnyInteraction } from '@sapphire/discord.js-utilities';
-import type { APIMessage } from 'discord-api-types/v9';
 import type {
+	ActionRowBuilder,
+	APIMessage,
 	Awaitable,
-	User,
-	Message,
+	BaseMessageOptions,
+	ButtonBuilder,
+	ButtonInteraction,
+	EmbedBuilder,
 	InteractionCollector,
-	MessageComponentInteraction,
-	MessageOptions,
-	MessageSelectOptionData,
-	WebhookEditMessageOptions,
 	InteractionReplyOptions,
 	InteractionUpdateOptions,
-	ReplyMessageOptions,
+	Message,
+	MessageComponentInteraction,
 	MessageEditOptions,
-	MessageEmbed,
-	MessageActionRow,
-	ButtonInteraction,
-	SelectMenuInteraction
+	MessageReplyOptions,
+	SelectMenuComponentOptionData,
+	StringSelectMenuBuilder,
+	StringSelectMenuInteraction,
+	User,
+	WebhookEditMessageOptions
 } from 'discord.js';
 import type { Menu } from '../structures/Menu';
 import type { MenuPageBuilder } from '../structures/MenuPageBuilder';
 import type { MenuPagesBuilder } from '../structures/MenuPagesBuilder';
 
+export type MenuPageRowUnion = ButtonBuilder | StringSelectMenuBuilder;
+
 export interface MenuPage {
-	embeds: MessageEmbed[];
-	components: MessageActionRow[];
+	embeds: EmbedBuilder[];
+	components: ActionRowBuilder<MenuPageRowUnion>[];
 }
 
 export type MenuPageResolvable = MenuPageBuilder | MenuPage;
@@ -36,24 +40,24 @@ export interface MenuArrowFunction {
 }
 
 export interface MenuArrowFunctionContext {
-	interaction: ButtonInteraction | SelectMenuInteraction;
+	interaction: ButtonInteraction | StringSelectMenuInteraction;
 	handler: Menu;
-	collector: InteractionCollector<MessageComponentInteraction>;
+	collector: InteractionCollector<ButtonInteraction | StringSelectMenuInteraction>;
 }
 
 export interface MenuOptions {
 	pages?: MenuPage[];
-	sharedRows?: MessageActionRow[];
+	sharedRows?: ActionRowBuilder<MenuPageRowUnion>[];
 }
 
-export type MenuSelectMenuOptionsFunction = (pageIndex: number) => Awaitable<Omit<MessageSelectOptionData, 'value'>>;
+export type MenuSelectMenuOptionsFunction = (pageIndex: number) => Awaitable<Omit<SelectMenuComponentOptionData, 'value'>>;
 
 export type MenuWrongUserInteractionReplyFunction = (
 	targetUser: User,
 	interactionUser: User
 ) => Awaitable<Parameters<MessageComponentInteraction['reply']>[0]>;
 
-export type MenuEmbedResolvable = MessageOptions['embeds'];
+export type MenuEmbedResolvable = BaseMessageOptions['embeds'];
 
 export interface SafeReplyToInteractionParameters<T extends 'edit' | 'reply' | never = never> {
 	messageOrInteraction: APIMessage | Message | AnyInteraction;
@@ -61,7 +65,7 @@ export interface SafeReplyToInteractionParameters<T extends 'edit' | 'reply' | n
 	interactionReplyContent: InteractionReplyOptions;
 	componentUpdateContent: InteractionUpdateOptions;
 	messageMethod?: T;
-	messageMethodContent?: T extends 'reply' ? ReplyMessageOptions : MessageEditOptions;
+	messageMethodContent?: T extends 'reply' ? MessageReplyOptions : MessageEditOptions;
 }
 
 export type MenuStopReasons =

@@ -1,5 +1,5 @@
-import { MessageActionRow, MessageEmbed } from 'discord.js';
-import type { MenuPage } from '../types/MenuPageTypes';
+import { ActionRowBuilder, EmbedBuilder } from 'discord.js';
+import type { MenuPage, MenuPageRowUnion } from '../types/MenuPageTypes';
 
 export class MenuPageBuilder {
 	private page: MenuPage;
@@ -8,56 +8,67 @@ export class MenuPageBuilder {
 		this.page = page ?? { embeds: [], components: [] };
 	}
 
-	public addEmbed(embed: MessageEmbed | ((embed: MessageEmbed) => MessageEmbed)): this {
+	public addEmbed(embed: EmbedBuilder | ((embed: EmbedBuilder) => EmbedBuilder)): this {
 		if (!this.page.embeds) this.page.embeds = [];
-		this.page.embeds.push(typeof embed === 'function' ? embed(new MessageEmbed()) : embed);
+		this.page.embeds.push(typeof embed === 'function' ? embed(new EmbedBuilder()) : embed);
 		return this;
 	}
 
 	public setEmbeds(
 		embeds:
-			| MessageEmbed[]
+			| EmbedBuilder[]
 			| ((
-					embed1: MessageEmbed,
-					embed2: MessageEmbed,
-					embed3: MessageEmbed,
-					embed4: MessageEmbed,
-					embed5: MessageEmbed,
-					embed6: MessageEmbed,
-					embed7: MessageEmbed,
-					embed8: MessageEmbed,
-					embed9: MessageEmbed,
-					embed10: MessageEmbed
-			  ) => MessageEmbed[])
+					embed1: EmbedBuilder,
+					embed2: EmbedBuilder,
+					embed3: EmbedBuilder,
+					embed4: EmbedBuilder,
+					embed5: EmbedBuilder,
+					embed6: EmbedBuilder,
+					embed7: EmbedBuilder,
+					embed8: EmbedBuilder,
+					embed9: EmbedBuilder,
+					embed10: EmbedBuilder
+			  ) => EmbedBuilder[])
 	): this {
 		this.page.embeds =
 			typeof embeds === 'function'
 				? embeds(
-						new MessageEmbed(),
-						new MessageEmbed(),
-						new MessageEmbed(),
-						new MessageEmbed(),
-						new MessageEmbed(),
-						new MessageEmbed(),
-						new MessageEmbed(),
-						new MessageEmbed(),
-						new MessageEmbed(),
-						new MessageEmbed()
+						new EmbedBuilder(),
+						new EmbedBuilder(),
+						new EmbedBuilder(),
+						new EmbedBuilder(),
+						new EmbedBuilder(),
+						new EmbedBuilder(),
+						new EmbedBuilder(),
+						new EmbedBuilder(),
+						new EmbedBuilder(),
+						new EmbedBuilder()
 				  )
 				: embeds;
 		return this;
 	}
 
-	public addComponentRow(row: MessageActionRow | ((row: MessageActionRow) => MessageActionRow)): this {
-		this.page.components.push(typeof row === 'function' ? row(new MessageActionRow()) : row);
+	public addComponentRow(
+		row: ActionRowBuilder<MenuPageRowUnion> | ((row: ActionRowBuilder<MenuPageRowUnion>) => ActionRowBuilder<MenuPageRowUnion>)
+	): this {
+		this.page.components.push(typeof row === 'function' ? row(new ActionRowBuilder<MenuPageRowUnion>()) : row);
 		return this;
 	}
 
 	public setComponentRows(
-		rows: MessageActionRow[] | ((row1: MessageActionRow, row2: MessageActionRow, row3: MessageActionRow) => MessageActionRow[])
+		rows:
+			| ActionRowBuilder<MenuPageRowUnion>[]
+			| ((
+					row1: ActionRowBuilder<MenuPageRowUnion>,
+					row2: ActionRowBuilder<MenuPageRowUnion>,
+					row3: ActionRowBuilder<MenuPageRowUnion>
+			  ) => ActionRowBuilder<MenuPageRowUnion>[])
 	): this {
 		this.page.components = [];
-		const newRows = typeof rows === 'function' ? rows(new MessageActionRow(), new MessageActionRow(), new MessageActionRow()) : rows;
+		const newRows =
+			typeof rows === 'function'
+				? rows(new ActionRowBuilder<MenuPageRowUnion>(), new ActionRowBuilder<MenuPageRowUnion>(), new ActionRowBuilder<MenuPageRowUnion>())
+				: rows;
 		for (const row of newRows) this.addComponentRow(row);
 		return this;
 	}
