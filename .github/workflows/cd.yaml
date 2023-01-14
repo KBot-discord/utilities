@@ -41,8 +41,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - package: '@kbotdev/custom-id'
-            folder: 'custom-id'
           - package: '@kbotdev/menus'
             folder: 'menus'
 
