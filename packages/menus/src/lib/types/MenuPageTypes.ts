@@ -18,7 +18,7 @@ import type {
 	StringSelectMenuBuilder,
 	StringSelectMenuInteraction,
 	User,
-	WebhookEditMessageOptions
+	WebhookMessageEditOptions
 } from 'discord.js';
 import type { Menu } from '../structures/Menu';
 import type { MenuPageBuilder } from '../structures/MenuPageBuilder';
@@ -61,7 +61,7 @@ export type MenuEmbedResolvable = BaseMessageOptions['embeds'];
 
 export interface SafeReplyToInteractionParameters<T extends 'edit' | 'reply' | never = never> {
 	messageOrInteraction: APIMessage | Message | AnyInteraction;
-	interactionEditReplyContent: WebhookEditMessageOptions;
+	interactionEditReplyContent: WebhookMessageEditOptions;
 	interactionReplyContent: InteractionReplyOptions;
 	componentUpdateContent: InteractionUpdateOptions;
 	messageMethod?: T;
