@@ -19,7 +19,7 @@ import {
 	InteractionCollector,
 	type ButtonInteraction,
 	type StringSelectMenuInteraction,
-	type WebhookEditMessageOptions,
+	type WebhookMessageEditOptions,
 	type InteractionReplyOptions,
 	type BaseMessageOptions,
 	type TextBasedChannel,
@@ -282,12 +282,12 @@ export class Menu {
 		if (this.response) {
 			if (isAnyInteraction(this.response)) {
 				if (this.response.replied || this.response.deferred) {
-					await this.response.editReply(homePage as WebhookEditMessageOptions);
+					await this.response.editReply(homePage as WebhookMessageEditOptions);
 				} else {
 					await this.response.reply(homePage as InteractionReplyOptions);
 				}
 			} else if (isMessageInstance(this.response)) {
-				await this.response.edit(homePage as WebhookEditMessageOptions);
+				await this.response.edit(homePage as WebhookMessageEditOptions);
 			}
 		} else if (isAnyInteraction(messageOrInteraction)) {
 			if (messageOrInteraction.replied || messageOrInteraction.deferred) {
