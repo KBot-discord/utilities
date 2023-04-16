@@ -92,7 +92,7 @@ export class Menu {
 	public static arrows = new Map<string, MenuArrowFunction>([
 		[
 			'@kbotdev/menus.goToPage', //
-			{ run: ({ handler, interaction }) => interaction.isSelectMenu() && (handler.index = parseInt(interaction.values[0], 10)) }
+			{ run: ({ handler, interaction }) => interaction.isStringSelectMenu() && (handler.index = parseInt(interaction.values[0], 10)) }
 		],
 		[
 			'@kbotdev/menus.firstPage', //

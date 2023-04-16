@@ -1,11 +1,7 @@
 {
-  "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "noEmit": true
-  },
-  "include": [
-	"vitest.config.ts",
-    "./packages/**/*.ts",
-    "./packages/**/*.mjs"
-  ]
+	"extends": "./tsconfig.base.json",
+	"compilerOptions": {
+		"noEmit": true
+	},
+	"include": ["vitest.config.ts", "./packages/**/*.ts", "./packages/**/*.mjs"]
 }
