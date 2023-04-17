@@ -2,7 +2,7 @@ module.exports = {
 	extends: ['@sapphire'],
 	parserOptions: {
 		project: './tsconfig.eslint.json',
-		tsconfigRootDir: __dirname,
+		tsconfigRootDir: __dirname
 	},
 	rules: {
 		'@typescript-eslint/require-await': 0,

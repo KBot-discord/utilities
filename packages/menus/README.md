@@ -10,6 +10,7 @@
 </div>
 
 ## Description
+
 Based on the PaginatedMessage utility from [`@sapphire/discord.js-utilities`](https://github.com/sapphiredev/utilities/tree/main/packages/discord.js-utilities).
 
 This package allows you to easily provide page-specific components as well as exposing functions to update pages.
