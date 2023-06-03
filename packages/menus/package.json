@@ -14,7 +14,7 @@
 	},
 	"homepage": "https://github.com/KBot-discord/utilities/tree/main/packages/menus",
 	"dependencies": {
-		"@sapphire/discord.js-utilities": "^6.0.5"
+		"@sapphire/discord.js-utilities": "^7.0.0"
 	},
 	"devDependencies": {
 		"@microsoft/tsdoc": "^0.14.2",
