@@ -9,16 +9,7 @@
 			"dependsOn": ["build"],
 			"outputs": ["coverage/**"]
 		},
-		"docs": {
-			"dependsOn": ["build"],
-			"outputs": ["docs/**"]
-		},
 		"lint": {},
-		"format": {},
-		"ci:lint": {},
-		"ci:test": {
-			"dependsOn": ["build"],
-			"outputs": ["coverage/**"]
-		}
+		"format": {}
 	}
 }
