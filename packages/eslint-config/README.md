@@ -16,9 +16,9 @@ npm i @kbotdev/eslint-config -D
 
 # Usage
 
-```js
-// eslintrc.cjs
+`eslintrc.cjs`
 
+```js
 module.exports = {
 	extends: ['@kbotdev/eslint-config']
 };
