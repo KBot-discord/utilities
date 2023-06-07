@@ -16,6 +16,8 @@ npm i @kbotdev/ts-config -D
 
 # Usage
 
+`tsconfig.json`
+
 ```json
 {
 	"extends": "@kbotdev/ts-config"

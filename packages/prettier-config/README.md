@@ -16,17 +16,17 @@ npm i @kbotdev/prettier-config -D
 
 # Usage
 
-```js
-// .prettierrc.js
+`.prettierrc.js`
 
+```js
 module.exports = require('@kbotdev/prettier-config');
 ```
 
 or
 
-```json
-// package.json
+`package.json`
 
+```json
 {
 	"prettier": "@kbotdev/prettier-config"
 }
