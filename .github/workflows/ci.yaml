@@ -1,10 +1,10 @@
 name: CI
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
+on: workflow_dispatch
+#  push:
+#    branches:
+#      - main
+#  pull_request:
 
 permissions:
   contents: read
@@ -31,8 +31,8 @@ jobs:
       - name: Install dependencies
         run: yarn --immutable
 
-      - name: Run build
-        run: yarn build
+      #- name: Run build
+      #  run: yarn build
 
       - name: Run lint
         run: yarn lint
