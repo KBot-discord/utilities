@@ -3,5 +3,10 @@
 	"compilerOptions": {
 		"noEmit": true
 	},
-	"include": ["vitest.config.ts", "./packages/**/*.ts", "./packages/**/*.mjs"]
+	"include": [
+		"packages/**/*.ts", //
+		".eslintrc.cjs",
+		"packages/eslint-config/**/*.js",
+		"packages/prettier-config/**/*.js"
+	]
 }
