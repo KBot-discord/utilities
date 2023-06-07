@@ -23,9 +23,6 @@ package-lock.json
 ## intellij ##
 .idea/
 
-## VSCode ##
-.vscode
-
 ## Logs ##
 logs
 *.log

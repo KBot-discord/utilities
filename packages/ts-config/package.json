@@ -1,0 +1,28 @@
+{
+	"name": "@kbotdev/ts-config",
+	"author": "@kbotdev",
+	"version": "0.1.0",
+	"license": "MIT",
+	"main": "tsconfig.json",
+	"exports": {
+		".": {
+			"import": "./tsconfig.json",
+			"require": "./tsconfig.json"
+		}
+	},
+	"files": [
+		"tsconfig.json"
+	],
+	"dependencies": {
+		"typescript": "^5.1.3"
+	},
+	"homepage": "https://github.com/kbot-discord/utilities/tree/main/packages/ts-config",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/kbot-discord/utilities.git",
+		"directory": "packages/ts-config"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}
