@@ -14,7 +14,7 @@
 		"format": "prettier --write --loglevel=warn \"src/**/*.js\""
 	},
 	"dependencies": {
-		"prettier": "^2.8.8"
+		"prettier": "^3.0.0"
 	},
 	"homepage": "https://github.com/kbot-discord/utilities/tree/main/packages/prettier-config",
 	"repository": {
