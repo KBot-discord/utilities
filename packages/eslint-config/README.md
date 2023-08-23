@@ -11,7 +11,7 @@ Predefined eslint configuration.
 # Install
 
 ```bash
-npm i @kbotdev/eslint-config -D
+npm i @kbotdev/eslint-config eslint-import-resolver-typescript eslint-plugin-import -D
 ```
 
 # Usage
