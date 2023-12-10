@@ -170,7 +170,7 @@ module.exports = {
 		'@typescript-eslint/typedef': 'off',
 		'@typescript-eslint/unbound-method': 'error',
 		'@typescript-eslint/unified-signatures': 'off',
-		'@typescript-eslint/return-await': 'error',
+		'@typescript-eslint/return-await': ['error', 'always'],
 		'accessor-pairs': 'off',
 		'array-callback-return': 'error',
 		'block-scoped-var': 'error',
