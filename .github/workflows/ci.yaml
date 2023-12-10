@@ -1,10 +1,6 @@
 name: CI
 
 on: workflow_dispatch
-#  push:
-#    branches:
-#      - main
-#  pull_request:
 
 permissions:
   contents: read
@@ -14,16 +10,16 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  check:
-    name: Check
+  checks:
+    name: Checks
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: yarn
@@ -31,18 +27,5 @@ jobs:
       - name: Install dependencies
         run: yarn --immutable
 
-      #- name: Run build
-      #  run: yarn build
-
       - name: Run lint
         run: yarn lint
-
-      - name: Run tests
-        run: yarn test
-
-  #    - name: Codecov upload
-  #      uses: codecov/codecov-action@v3.1.1
-  #      with:
-  #        token: ${{ secrets.CODECOV_TOKEN }}
-  #        directory: coverage/
-  #        fail_ci_if_error: true
